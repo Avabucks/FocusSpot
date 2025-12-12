@@ -7,7 +7,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { BiCheck, BiErrorAlt, BiWorld, BiSend, BiSolidBolt, BiSearch, BiRightArrowAlt, BiMapAlt, BiEditAlt, BiTime, BiHome, BiInfoCircle, BiTrash } from "react-icons/bi";
+import { BiCheck, BiErrorAlt, BiWorld, BiSend, BiSolidBolt, BiSearch, BiRightArrowAlt, BiMapAlt, BiEditAlt, BiTime, BiHome, BiInfoCircle, BiTrash, BiShow, BiHide } from "react-icons/bi";
 
 interface Props {
     id: string;
@@ -24,6 +24,7 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
     const [errorMsg, setErrorMsg] = useState<{ success?: boolean; error?: string; }>({ success: true });
     const [searchString, setSearchString] = useState("")
     const [loading, setLoading] = useState(false)
+    const [showMap, setShowMap] = useState(false)
     const [nameLoading, setNameLoading] = useState(false)
     const [progress, setProgress] = useState(0)
     const [formData, setFormData] = useState({
@@ -87,10 +88,12 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
             }
         }
 
-        if (position.lat && position.lng && formData.placeName == "") fetchData();
+        // if (position.lat && position.lng && formData.placeName == "") fetchData();
     }, [position]);
 
     useEffect(() => {
+        setShowMap(id === "new")
+
         const handleMessage = (event: MessageEvent) => {
             reciveMessage(event.data);
         };
@@ -275,8 +278,17 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
                                     <button className="cta-button outline aspect-square" onClick={handleSearch}><BiSearch size={20} /></button>
                                 }
                             </div>
+                            <div className="aspect-square flex items-center">
+                                <button className="cta-button outline aspect-square" onClick={() => setShowMap(prev => !prev)}>
+                                    {showMap ?
+                                        <BiHide size={20} />
+                                        :
+                                        <BiShow size={20} />
+                                    }
+                                </button>
+                            </div>
                         </div>
-                        <div className="relative h-[400px] rounded-(--border-radius) overflow-hidden">
+                        <div className={`relative h-[400px] rounded-(--border-radius) overflow-hidden ${showMap ? "" : "hidden"}`}>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                                 <div className="relative w-10 h-10 flex flex-col items-center z-9" style={{ filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.4))' }}>
                                     <div className="w-10 aspect-square text-lg border-[3px] border-white rounded-full flex items-center justify-center bg-(--primary-light) text-white">
