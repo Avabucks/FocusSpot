@@ -1,7 +1,6 @@
 # Cos'è FocusSpot?
 
 FocusSpot è l'app che ti aiuta a scoprire i migliori spazi di studio e lavoro condivisi nella tua città.  
-Che tu stia cercando una biblioteca silenziosa per concentrarti sui tuoi esami, un caffè accogliente per lavorare al tuo progetto, o uno spazio di coworking dove incontrare altre persone motivate, FocusSpot ti guida verso il luogo perfetto per te.
 
 ## Funzionalità principali
 
@@ -10,7 +9,6 @@ Con FocusSpot puoi esplorare una varietà di ambienti pensati per la produttivit
 - Biblioteche pubbliche e universitarie
 - Sale studio
 - Caffetterie con WiFi
-- Spazi di coworking
 - Parchi con aree attrezzate
 - E molto altro...
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Cos'è FocusSpot? - FocusSpot",
-  description: "FocusSpot è l'app che ti aiuta a scoprire i migliori spazi di studio e lavoro condivisi nella tua città. Che tu stia cercando una biblioteca silenziosa per concentrarti sui tuoi esami, un caffè accogliente per lavorare al tuo progetto, o uno spazio di coworking dove incontrare altre persone motivate, FocusSpot ti guida verso il luogo perfetto per te.",
+  description: "FocusSpot è l'app che ti aiuta a scoprire i migliori spazi di studio e lavoro condivisi nella tua città. FocusSpot ti guida verso il luogo perfetto per te.",
 };
 
 export default async function About({
@@ -37,7 +37,6 @@ export default async function About({
               <li>biblioteche pubbliche e universitarie,</li>
               <li>sale studio,</li>
               <li>caffetterie con WiFi,</li>
-              <li>spazi di coworking,</li>
               <li>parchi con aree attrezzate,</li>
               <li>e molto altro ...</li>
             </ul>

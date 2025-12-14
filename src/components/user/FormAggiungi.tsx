@@ -49,6 +49,11 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
         { dayOfWeek: 5, isOpen: false, openTime: "09:00", closeTime: "21:00" },
         { dayOfWeek: 6, isOpen: false, openTime: "09:00", closeTime: "21:00" },
     ]);
+    const entryModes = [
+        { value: 0, label: "Accesso libero" },
+        { value: 1, label: "Serve la tessera" },
+        { value: 2, label: "Consumazione obbligatoria" },
+    ];
 
     const [position, setPosition] = useState({
         lat: null,
@@ -185,6 +190,8 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
 
         if (type === "checkbox" && e.target instanceof HTMLInputElement) {
             value = e.target.checked;
+        } else if (type === "radio" && e.target instanceof HTMLInputElement) {
+            value = e.target.value;
         } else {
             value = e.target.value;
         }
@@ -290,7 +297,7 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
                             </div>
                         </div>
                         <div className={`relative h-[400px] rounded-(--border-radius) overflow-hidden ${showMap ? "" : "hidden"}`}>
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                                 <div className="relative w-10 h-10 flex flex-col items-center z-9" style={{ filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.4))' }}>
                                     <div className="w-10 aspect-square text-lg border-[3px] border-white rounded-full flex items-center justify-center bg-(--primary-light) text-white">
                                         <div className="ml-0.5 mt-px"><BiSolidBolt size={21} /></div>
@@ -357,7 +364,21 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
                 <div className="flex flex-col gap-5 items-center justify-between">
                     <div className="w-full flex flex-col">
                         <h3 className="w-full font-medium">Tipologia di ingresso</h3>
-                        TODO: Accesso libero, Serve la tessera, Consumazione obbligatoria
+                        <div className="radio-cont mt-2">
+                            {entryModes.map((l) => (
+                                <label key={l.value}>
+                                    <input
+                                        type="radio"
+                                        name="entryMode"
+                                        value={l.value}
+                                        checked={formData.entryMode == l.value}
+                                        onChange={handleChange}
+                                    />
+                                    <span className="check"></span>
+                                    <span>{l.label}</span>
+                                </label>
+                            ))}
+                        </div>
                     </div>
                     <div className="w-full flex flex-col">
                         <h3 className="w-full font-medium">Servizi</h3>

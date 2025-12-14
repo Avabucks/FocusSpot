@@ -192,7 +192,7 @@ textarea::placeholder {
     border-bottom: 1px solid var(--contrast-01);
 }
 
-.switch > div {
+.switch>div {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -200,43 +200,81 @@ textarea::placeholder {
     padding: 10px 15px;
 }
 
-.switch > div > div {
-  display: flex;
+.switch>div>div {
+    display: flex;
 }
 
-.switch > div > div input[type="checkbox"] {
-  height: 0;
-  width: 0;
-  visibility: hidden;
+.switch>div>div input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
 }
 
-.switch > div > div label {
-  cursor: pointer;
-  width: 45px;
-  height: 20px;
-  background-color: var(--contrast-01);
-  display: block;
-  border-radius: 50em;
-  position: relative;
-  transition: 0.3s;
-  padding: 4px;
-  box-sizing: content-box;
+.switch>div>div label {
+    cursor: pointer;
+    width: 45px;
+    height: 20px;
+    background-color: var(--contrast-01);
+    display: block;
+    border-radius: 50em;
+    position: relative;
+    transition: 0.3s;
+    padding: 4px;
+    box-sizing: content-box;
 }
 
-.switch > div > div label:after {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: var(--bg);
-  border-radius: 50em;
-  transition: 0.3s;
+.switch>div>div label:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--bg);
+    border-radius: 50em;
+    transition: 0.3s;
 }
 
-.switch > div > div input:checked + label {
-  background-color: var(--primary);
+.switch>div>div input:checked+label {
+    background-color: var(--primary);
 }
 
-.switch > div > div input:checked + label:after {
-  transform: translateX(calc(100% + 5px));
+.switch>div>div input:checked+label:after {
+    transform: translateX(calc(100% + 5px));
+}
+
+.radio-cont {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    color: var(--text-color);
+}
+
+.radio-cont label {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: fit-content;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 50px;
+    position: relative;
+    transition: 0.2s;
+}
+
+.radio-cont .check {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50em;
+    border: 2px solid var(--primary);
+    position: absolute;
+    box-sizing: border-box;
+    transition: 0.2s linear;
+}
+
+.radio-cont input[type="radio"] {
+    visibility: hidden;
+}
+
+.radio-cont input[type="radio"]:checked+.check {
+    border: 6px solid var(--primary);
 }
