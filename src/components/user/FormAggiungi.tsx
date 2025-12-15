@@ -41,13 +41,13 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
         hasSilence: false,
     });
     const [openingHours, setOpeningHours] = useState([
-        { dayOfWeek: 0, isOpen: false, openTime: "09:00", closeTime: "21:00" },
-        { dayOfWeek: 1, isOpen: false, openTime: "09:00", closeTime: "21:00" },
-        { dayOfWeek: 2, isOpen: false, openTime: "09:00", closeTime: "21:00" },
-        { dayOfWeek: 3, isOpen: false, openTime: "09:00", closeTime: "21:00" },
-        { dayOfWeek: 4, isOpen: false, openTime: "09:00", closeTime: "21:00" },
-        { dayOfWeek: 5, isOpen: false, openTime: "09:00", closeTime: "21:00" },
-        { dayOfWeek: 6, isOpen: false, openTime: "09:00", closeTime: "21:00" },
+        { dayOfWeek: 0, isOpen: true, openTime: "09:00", closeTime: "21:00" },
+        { dayOfWeek: 1, isOpen: true, openTime: "09:00", closeTime: "21:00" },
+        { dayOfWeek: 2, isOpen: true, openTime: "09:00", closeTime: "21:00" },
+        { dayOfWeek: 3, isOpen: true, openTime: "09:00", closeTime: "21:00" },
+        { dayOfWeek: 4, isOpen: true, openTime: "09:00", closeTime: "21:00" },
+        { dayOfWeek: 5, isOpen: true, openTime: "09:00", closeTime: "21:00" },
+        { dayOfWeek: 6, isOpen: true, openTime: "09:00", closeTime: "21:00" },
     ]);
     const entryModes = [
         { value: 0, label: "Accesso libero" },
