@@ -8,12 +8,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BiCheck, BiErrorAlt, BiWorld, BiSend, BiSolidBolt, BiSearch, BiRightArrowAlt, BiMapAlt, BiEditAlt, BiTime, BiHome, BiInfoCircle, BiTrash, BiShow, BiHide } from "react-icons/bi";
-import dynamic from 'next/dynamic';
-
-const TurnstileCaptcha = dynamic(
-    () => import('../captcha/TurnstileCaptcha'),
-    { ssr: false }
-);
+import TurnstileCaptcha from "../captcha/TurnstileCaptcha";
 
 interface Props {
     id: string;

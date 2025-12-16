@@ -7,12 +7,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BiHome, BiSend } from "react-icons/bi";
-import dynamic from 'next/dynamic';
-
-const TurnstileCaptcha = dynamic(
-  () => import('../captcha/TurnstileCaptcha'),
-  { ssr: false }
-);
+import TurnstileCaptcha from "../captcha/TurnstileCaptcha";
 
 export default function UsersPage() {
   const searchParams = useSearchParams();
