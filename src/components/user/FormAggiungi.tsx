@@ -11,8 +11,8 @@ import { BiCheck, BiErrorAlt, BiWorld, BiSend, BiSolidBolt, BiSearch, BiRightArr
 import dynamic from 'next/dynamic';
 
 const TurnstileCaptcha = dynamic(
-  () => import('../captcha/TurnstileCaptcha'),
-  { ssr: false }
+    () => import('../captcha/TurnstileCaptcha'),
+    { ssr: false }
 );
 
 interface Props {
@@ -72,6 +72,10 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
             router.push("/login");
         }
     }, [user]);
+
+    useEffect(() => {
+        setCaptchaToken(null)
+    }, [progress]);
 
     useEffect(() => {
         const fetchData = async () => {
