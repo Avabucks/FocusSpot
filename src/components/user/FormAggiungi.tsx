@@ -8,6 +8,12 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { BiCheck, BiErrorAlt, BiWorld, BiSend, BiSolidBolt, BiSearch, BiRightArrowAlt, BiMapAlt, BiEditAlt, BiTime, BiHome, BiInfoCircle, BiTrash, BiShow, BiHide } from "react-icons/bi";
+import dynamic from 'next/dynamic';
+
+const TurnstileCaptcha = dynamic(
+  () => import('../captcha/TurnstileCaptcha'),
+  { ssr: false }
+);
 
 interface Props {
     id: string;
@@ -54,6 +60,7 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
         { value: 1, label: "Serve la tessera" },
         { value: 2, label: "Consumazione obbligatoria" },
     ];
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
     const [position, setPosition] = useState({
         lat: null,
@@ -136,6 +143,7 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
     }, []);
 
     const reciveMessage = (message: any) => {
+        if (message.source === "cloudflare-challenge") return;
         const handler = JSON.parse(message);
         if (handler.position) {
             setFormData(prev => ({
@@ -236,13 +244,14 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
         }
 
         setLoading(true);
-        const result = await aggiungiLuogo(id, user, formData, openingHours)
+        const result = await aggiungiLuogo(id, user, formData, openingHours, captchaToken)
         if (result.success && user.isAdmin == 0) {
             setProgress(4)
         } else if (result.success && user.isAdmin == 1) {
             router.push('/moderation')
         } else {
             setErrorMsg(result)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         setLoading(false);
@@ -493,6 +502,10 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
         }
         const btnClasses = clsx(
             "cta-button",
+            (user.isAdmin == 0 && !captchaToken) ? "disabled noClick" : "primary"
+        );
+        const dltClasses = clsx(
+            "cta-button",
             count > 2 ? "primary" : "disabled"
         );
 
@@ -560,12 +573,17 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
                             </div>
                         ))}
                     </div>
+                    {user.isAdmin == 0 &&
+                        <div>
+                            <TurnstileCaptcha onVerify={(token) => setCaptchaToken(token)} />
+                        </div>
+                    }
                     {loading ?
                         <div className="mx-auto border-[3px] border-solid border-(--primary) border-t-[rgba(0,0,0,0)] rounded-full w-[30px] h-[30px] animate-spin"></div>
                         :
-                        <button className="cta-button primary" onClick={handleSend}>{btnText()}</button>
+                        <button className={btnClasses} onClick={handleSend}>{btnText()}</button>
                     }
-                    {(user.isAdmin == 1 && id != "new") && <button className={btnClasses} onClick={handleDelete}><BiTrash size={20} />Elimina</button>}
+                    {(user.isAdmin == 1 && id != "new") && <button className={dltClasses} onClick={handleDelete}><BiTrash size={20} />Elimina</button>}
                 </div>
             </div>
         )

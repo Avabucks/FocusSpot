@@ -7,6 +7,12 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BiHome, BiSend } from "react-icons/bi";
+import dynamic from 'next/dynamic';
+
+const TurnstileCaptcha = dynamic(
+  () => import('../captcha/TurnstileCaptcha'),
+  { ssr: false }
+);
 
 export default function UsersPage() {
   const searchParams = useSearchParams();
@@ -42,10 +48,11 @@ export default function UsersPage() {
     placeName: null,
     testo: "",
   });
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const btnClasses = clsx(
     "cta-button",
-    (formData.email.length > 0 && formData.testo.length > 0) ? "primary" : "disabled noClick"
+    (formData.email.length > 0 && formData.testo.length > 0 && captchaToken) ? "primary" : "disabled noClick"
   );
 
   useEffect(() => {
@@ -79,7 +86,7 @@ export default function UsersPage() {
       return;
     }
 
-    const result = await mailContact(formData)
+    const result = await mailContact(formData, captchaToken)
     if (result.success) {
       setSuccess(true)
     }
@@ -144,7 +151,10 @@ export default function UsersPage() {
                   onChange={handleChange}
                   placeholder={bodyPlaceholdersByType[type]}
                 />
-              </div >
+              </div>
+              <div>
+                <TurnstileCaptcha onVerify={(token) => setCaptchaToken(token)} />
+              </div>
               <button className={btnClasses} onClick={handleSend}><BiSend size={20} />Invia</button>
             </div >
           </div >

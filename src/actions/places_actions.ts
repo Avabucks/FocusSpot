@@ -1,8 +1,15 @@
 "use server"
 import { pool } from "@/src/lib/db";
 import { sendEmail } from "../utils/send_mail";
+import { verifyCaptcha } from "../utils/verify_captcha";
 
-export async function aggiungiLuogo(id: any, user: any, formData: any, openingHours: any) {
+export async function aggiungiLuogo(id: any, user: any, formData: any, openingHours: any, captchaToken: string | null) {
+
+    if (user.isAdmin == 0) {
+        const verify = await verifyCaptcha(captchaToken)
+        if (!verify.success) return verify;
+    }
+
     const stato = user.isAdmin ? 2 : 0;
 
     if (!user) return { success: false, error: "Utente non esistente" };
@@ -154,20 +161,23 @@ export async function getPlaceFromId(id: any) {
 
 export async function deleteLuogo(id: any) {
 
-  try {
-    const result = await pool.query(
-      'DELETE FROM places WHERE id = $1',
-      [id]
-    );
-    return result.rowCount;
-  } catch (err) {
-    console.error(err);
-    return false;
-  }
+    try {
+        const result = await pool.query(
+            'DELETE FROM places WHERE id = $1',
+            [id]
+        );
+        return result.rowCount;
+    } catch (err) {
+        console.error(err);
+        return false;
+    }
 
 }
 
-export async function mailContact(formData: any) {
+export async function mailContact(formData: any, captchaToken: string | null) {
+    const verify = await verifyCaptcha(captchaToken)
+    if (!verify.success) return verify;
+
     const sended = await sendEmail({
         to: "avabuckssociety@gmail.com",
         subject: formData.oggetto,
