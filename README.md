@@ -1,3 +1,35 @@
+# What is FocusSpot?
+
+FocusSpot is the app that helps you discover the best shared study and work spaces in your city.
+
+## Main Features
+
+With FocusSpot, you can explore a variety of environments designed for productivity:
+
+* Public and university libraries
+* Study rooms
+* Cafés with WiFi
+* Parks with equipped areas
+* And much more...
+
+Each location comes with detailed information provided by the **community** and useful tips to help you choose the ideal space for your needs.
+
+## Why FocusSpot?
+
+We believe that the right environment makes a difference.
+Studying or working in a space that meets your needs can boost your productivity and make your study or workdays more enjoyable.
+
+## Contribute
+
+You can help improve FocusSpot in two ways:
+
+1. Suggesting new study or work spaces to add to the maps [here](/editor/new)
+2. Supporting the project through a donation on [Ko-fi](https://ko-fi.com/focusspot)
+
+Your contribution helps the **community** grow and keeps information about available spaces up to date.
+
+-----------------------------------------------------------------------------------------------------------
+
 # Cos'è FocusSpot?
 
 FocusSpot è l'app che ti aiuta a scoprire i migliori spazi di studio e lavoro condivisi nella tua città.  
