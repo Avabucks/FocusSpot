@@ -33,14 +33,27 @@ export async function GET(request: Request) {
       WHERE stato=2
     `);
 
-    const customData = result.rows.map(row => ({
-      id: row.id,
-      placeName: row.place_name,
-      placeLat: row.place_lat,
-      placeLong: row.place_long,
-      isClosed: false,
-      entryMode: row.entry_mode
-    }));
+    const now = new Date();
+      const getDate = (now.getDay() + 6) % 7;                //Giorno della settimana (0=Lunedì, 6=Domenica)
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();      //Prendi l'orario attuale in minuti 
+      const customData = result.rows.map(row => {
+        const opening = row.place_opening_hours ? row.place_opening_hours[getDate] : null;
+        const closing = row.place_closing_hours ? row.place_closing_hours[getDate] : null;
+        return {
+          id: row.id,
+          placeName: row.place_name,
+          placeLat: row.place_lat,
+          placeLong: row.place_long,
+          placeOpeningHours: row.place_opening_hours,
+          placeClosingHours: row.place_closing_hours,
+          isClosed: opening === null ||
+            closing === null ||
+            currentMinutes < opening ||
+            currentMinutes >= closing,
+          entryMode: row.entry_mode,
+        };
+      });
+        console.log("ORARIO ATTUALE IN MINUTI:", currentMinutes); 
 
     return NextResponse.json(customData, {
       status: 200,
