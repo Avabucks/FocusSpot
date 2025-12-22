@@ -453,7 +453,7 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
                         <div className="switch">
                             <div>
                                 <span>
-                                    Smart Woking
+                                    Smart Working
                                 </span>
                                 <div>
                                     <input type="checkbox"
