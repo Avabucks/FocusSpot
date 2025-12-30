@@ -74,8 +74,5 @@ export async function GET(
   }
 }
 
-// TODOs:
-// - aperto/chiuso giorni non americani 0 = lunedi
-
 // **VULNERABILE**
 // - sistemare con app-check
