@@ -15,7 +15,7 @@ export async function OPTIONS() {
 }
 
 export async function GET(request: Request) {
-  /*if (request.headers.get('x-bearer-key') !== process.env.BEARER_KEY) {
+  if (request.headers.get('x-bearer-key') !== process.env.BEARER_KEY) {
     return NextResponse.json(
       { error: 'Unauthorized' },
       {
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
         },
       }
     );
-  }*/
+  }
 
   try {
     const result = await pool.query(`
