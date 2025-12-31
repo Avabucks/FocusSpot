@@ -23,6 +23,7 @@ export async function GET(
           P.has_heating,
           P.has_smart,
           P.has_silence,
+          P.has_disabled_access,
           P.opening_hours,
           U.username
       FROM places P
@@ -55,6 +56,7 @@ export async function GET(
       hasHeating: row.has_heating,
       hasSmart: row.has_smart,
       hasSilence: row.has_silence,
+      hasDisabledAccess: row.has_disabled_access,
       username: row.username
     };
 

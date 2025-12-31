@@ -40,6 +40,7 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
         hasHeating: false,
         hasSmart: false,
         hasSilence: false,
+        hasDisabledAccess: false,
     });
     const [openingHours, setOpeningHours] = useState([
         { dayOfWeek: 0, isOpen: true, openTime: "09:00", closeTime: "21:00" },
@@ -52,7 +53,7 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
     ]);
     const entryModes = [
         { value: 0, label: "Accesso libero" },
-        { value: 1, label: "Serve la tessera" },
+        { value: 1, label: "Accesso con tessera" },
         { value: 2, label: "Consumazione obbligatoria" },
     ];
     const [captchaToken, setCaptchaToken] = useState<string | null>(null);
@@ -477,6 +478,21 @@ export default function ProfiloLayout({ id }: Readonly<Props>) {
                                         checked={formData.hasSilence}
                                         onChange={handleChange} />
                                     <label htmlFor="hasSilence">{''}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="switch">
+                            <div>
+                                <span>
+                                    Accesibilità disabili
+                                </span>
+                                <div>
+                                    <input type="checkbox"
+                                        id="hasDisabledAccess"
+                                        name="hasDisabledAccess"
+                                        checked={formData.hasDisabledAccess}
+                                        onChange={handleChange} />
+                                    <label htmlFor="hasDisabledAccess">{''}</label>
                                 </div>
                             </div>
                         </div>

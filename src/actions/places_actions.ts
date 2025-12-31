@@ -30,11 +30,12 @@ export async function aggiungiLuogo(id: any, user: any, formData: any, openingHo
                 has_heating,
                 has_smart,
                 has_silence,
+                has_disabled_access,
                 uid,
                 stato,
                 data_accettazione,
                 opening_hours
-            ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`,
+            ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)`,
             [
                 formData.placeName,
                 formData.description,
@@ -47,6 +48,7 @@ export async function aggiungiLuogo(id: any, user: any, formData: any, openingHo
                 formData.hasHeating,
                 formData.hasSmart,
                 formData.hasSilence,
+                formData.hasDisabledAccess,
                 user.uid,
                 stato,
                 new Date(),
@@ -70,10 +72,11 @@ export async function aggiungiLuogo(id: any, user: any, formData: any, openingHo
                 has_heating = $9,
                 has_smart = $10,
                 has_silence = $11,
-                stato = $12,
-                data_accettazione = $13,
-                opening_hours = $14
-            WHERE id = $15`,
+                has_disabled_access = $12,
+                stato = $13,
+                data_accettazione = $14,
+                opening_hours = $15
+            WHERE id = $16`,
             [
                 formData.placeName,
                 formData.description,
@@ -86,6 +89,7 @@ export async function aggiungiLuogo(id: any, user: any, formData: any, openingHo
                 formData.hasHeating,
                 formData.hasSmart,
                 formData.hasSilence,
+                formData.hasDisabledAccess,
                 stato,
                 new Date(),
                 JSON.stringify(openingHours),
@@ -131,6 +135,7 @@ export async function getPlaceFromId(id: any) {
             has_heating,
             has_smart,
             has_silence,
+            has_disabled_access,
             opening_hours
          FROM places
          WHERE id = $1`,
@@ -154,6 +159,7 @@ export async function getPlaceFromId(id: any) {
             hasHeating: row.has_heating,
             hasSmart: row.has_smart,
             hasSilence: row.has_silence,
+            hasDisabledAccess: row.has_disabled_access,
         },
         openingHours: row.opening_hours
     };
@@ -163,7 +169,7 @@ export async function deleteLuogo(id: any) {
 
     try {
         const result = await pool.query(
-            'DELETE FROM places WHERE id = $1',
+            'UPDATE places SET stato = 1 WHERE id = $1',
             [id]
         );
         return result.rowCount;

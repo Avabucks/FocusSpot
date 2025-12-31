@@ -40,5 +40,6 @@ CREATE TABLE IF NOT EXISTS places (
   has_air BOOLEAN NOT NULL DEFAULT false,
   has_heating BOOLEAN NOT NULL DEFAULT false,
   has_smart BOOLEAN NOT NULL DEFAULT false,
-  has_silence BOOLEAN NOT NULL DEFAULT false
+  has_silence BOOLEAN NOT NULL DEFAULT false,
+  has_disabled_access BOOLEAN NOT NULL DEFAULT false
 );
