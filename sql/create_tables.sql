@@ -1,5 +1,5 @@
 --
--- Database : 'proverby'
+-- Database : 'focusspot'
 -- PostgreSQL
 --
 -- --------------------------------------------------------
